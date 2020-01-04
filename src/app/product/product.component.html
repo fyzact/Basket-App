@@ -1,0 +1,32 @@
+
+<div class="col">
+    <h4 class="page-header">Ürünler</h4>
+  </div>
+
+  <div *ngIf="addedProduct" class="alert alert-success">
+    {{addedProduct}} added cart
+  </div>
+  <div class="col">
+    <input class="form-control" type="text" placeholder="type something..." [(ngModel)]="filterText">
+  </div>
+  <div class="col" *ngIf=filterText>
+    <b>{{filterText}}</b> için arama yaptınız.
+    </div>
+<div class="col mt-3">
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let product of products | filter:filterText">
+            <button (click)="addToCart(product)" type="button"  class="btn btn-sm btn-primary float-right">
+                Add to Cart 
+                <i class="far fa-shopping-cart"></i>
+            </button>
+            <h5><b>{{product.productName}}</b></h5>
+            <p>{{product.quantityPerUnit}}</p>
+            <h6>{{product.unitPrice}}</h6>
+            <span>
+                <b>Price with tax :</b>
+                ({{product.unitPrice | tax | currency:'USD'}})
+              </span>
+            
+        </li>
+      </ul>
+  </div>
